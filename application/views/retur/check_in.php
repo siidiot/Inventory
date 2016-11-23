@@ -1,0 +1,180 @@
+<script type="text/javascript" src="<?=base_url()?>asset/js/jquery.js"></script>
+<script type="text/javascript">
+function hitung2(){
+        stok = eval(document.formCheckin.stok.value);
+        qty = eval(document.formCheckin.qty.value);
+        
+        total = stok+qty;
+        document.formCheckin.stockbr.value = total;
+       
+            document.getElementById('stockbr').style.backgroundColor = 'green';
+      
+        
+    }
+    
+</script>
+
+<?=form_open('retur/check_in',['class'=>'form-horizontal', 'role'=>'form', 'id'=>'jvalidate','name'=>'formCheckin'])?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Retur Check</strong> IN</h3>
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="panel-body">
+                                    <input type="hidden" class="form-control" value="<?=$kodeunik?>" name="idtrans"/>
+                                </div>
+                                <div class="panel-body">                                                                        
+                                    
+                                    <div class="row">
+                                        
+                                        <div class="col-md-6">
+
+                                        <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Nama Customer</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                            
+                                                    <select class="form-control select" name="nama" id="nama_customer">
+                                                    <option>==pilih customer==</option>
+                                                        <?php 
+                                                            foreach ($customer->result() as $r) {
+                                                                echo "<option value='$r->nama_customer'>$r->nama_customer</option>";
+                                                            }
+                                                        ?>
+                                                    </select>
+                                                    <div id="detail_customer">
+                                                        <span class="help-block">   Detail Customer</span>
+                                                       <table>
+                                                           <tr>
+                                                               <td>ID Customer</td><td>:</td><td><input size="10" type="text" disabled  readonly="readonly"></td>
+                                                           </tr>
+                                                           <tr>
+                                                               <td>Nama Customer</td><td>:</td><td><input size="21" type="text" disabled  readonly="readonly"></td>
+                                                           </tr>
+                                                            <tr valign="top"> 
+                                                               <td>Alamat</td><td>:</td><td><textarea cols="19" rows="4" disabled></textarea></td>
+                                                           </tr>
+                                                       </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                    
+                                            
+                                            <div class="form-group">
+                                                <label class="col-md-3 col-xs-12 control-label">Nama Product</label>
+                                                <div class="col-md-6 col-xs-12">                                                                                            
+                                                    <select class="form-control select" name="id" id="id">
+                                                    <option value=""><?="&nbsp;"?></option>
+                                                        <?php 
+                                                            foreach ($product->result() as $r) {
+                                                                echo "<option value='$r->pro_id'>$r->nama_product</option>";
+                                                            }
+                                                        ?>
+                                                    </select>
+                                                    <div id="detail_product">
+                                                        <span class="help-block">   Detail Product</span>
+     
+        
+                                                           <table>
+                                                               <tr>
+                                                                   <td>Product ID</td><td>:</td><td><input size="10"  type="text" disabled  readonly="readonly"></td>
+                                                               </tr>
+                                                               <tr>
+                                                                   <td>Nama Product</td><td>:</td><td><input size="22" type="text" disabled readonly="readonly"></td>
+                                                               </tr>
+                                                                <tr>
+                                                                   <td>Kategori</td><td>:</td><td><input size="22" type="text" disabled  readonly="readonly"></td>
+                                                               </tr>
+                                                               <tr valign="top">
+                                                                   <td>Stock Tersedia</td><td>:</td><td><input size="10" type="text" disabled  </td>
+                                                               </tr>
+                                                               <tr valign="top">
+                                                                   <td>Stock Update</td><td>:</td><td><input size="10" type="int" name="stockbr"  readonly="readonly"></td>
+                                                               </tr>
+                                                                <tr valign="top">
+                                                                   <td>ket</td><td>:</td><td><textarea cols="20" rows="4" disabled></textarea></td>
+                                                               </tr>
+                                                           </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                           
+                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Tanggal Transaksi</label>
+                                                <div class="col-md-5">                                            
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                        <input type="date" class="form-control" id="date" name="date" />
+                                                    </div>                                            
+                                                
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                        <label class="col-md-3 control-label">QTY:</label>          
+                                        <div class="col-md-4">
+                                        <div id="dis">
+                                            <input type="text" class="form-control" disabled="" name="qty"/>                                        
+                                            <span class="help-block">pilih produk dahulu!!!!</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Keterangan</label>
+                                                <div class="col-md-9 col-xs-12">                                            
+                                                    <textarea class="form-control" rows="5" id="ket" name="ket"></textarea>
+                                                    
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+                                <div class="panel-footer">
+                                    <button type="reset" class="btn btn-default">Clear Form</button>                                    
+                                    <button type="submit" name="submit" class="btn btn-primary pull-right">Submit</button>
+                                </div>
+                            </div>
+<?php echo form_close()?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+       
+
+        $("#nama_customer").change(function(){
+            var nama_customer = $("#nama_customer").val();
+            $.ajax({
+                type: "POST",
+                url : "<?php echo base_url('index.php/check_out/get_detail_customer'); ?>",
+                data: "nama_customer="+nama_customer,
+                success: function(data){
+                    $('#detail_customer').html(data);
+                }
+            });
+        });
+
+        $("#id").change(function(){
+            var id = $("#id").val();
+            $.ajax({
+                type: "POST",
+                url : "<?php echo base_url('index.php/check_in/get_detail_product'); ?>",
+                data: "id="+id,
+                success: function(data){
+                    $('#detail_product').html(data);
+                }
+            });
+            document.getElementById('dis').innerHTML = "<input type='text'  class=form-control id='QTY' onChange='hitung2()'  name='qty'/><span class='help-block'>min size = 1</span>"
+        });
+
+
+    })
+</script>
